@@ -8,8 +8,8 @@ const {
 } = require('@discordjs/voice');
 const path = require('path');
 
-const TOKEN = 'MTMwNDY1OTQyMDA0MjYyNTAzNA.GVb8Q5.fb2kQPqJGH6luO98h4bl8s6RZJE_gJ7H34ue_4'; // Replace with your bot's token
-const CHANNEL_ID = '1085386829781549057'; // Replace with your voice channel ID
+const TOKEN = process.env.DISCORD_TOKEN; // Bot token
+const CHANNEL_ID = process.env.CHANNEL_ID; // Voice channel ID
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
 
