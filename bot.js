@@ -7,9 +7,13 @@ const {
     NoSubscriberBehavior
 } = require('@discordjs/voice');
 const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const TOKEN = process.env.DISCORD_TOKEN; // Bot token
 const CHANNEL_ID = process.env.CHANNEL_ID; // Voice channel ID
+console.log('DISCORD_TOKEN:', process.env.DISCORD_TOKEN);
+console.log('CHANNEL_ID:', process.env.CHANNEL_ID);
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
 
