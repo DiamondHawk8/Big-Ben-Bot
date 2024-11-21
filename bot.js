@@ -25,16 +25,23 @@ client.once('ready', () => {
 function scheduleHourlyChime() {
     const now = new Date();
     const nextHour = new Date(now);
-    nextHour.setHours(now.getHours() + 1, 0, 0, 0); // Set to the start of the next hour
+    nextHour.setHours(now.getHours()+1, 0, 0, 0); // Set to the start of the next hour
     const timeUntilNextHour = nextHour - now;
 
     console.log(`Next chime scheduled in ${Math.floor(timeUntilNextHour / 1000)} seconds.`);
 
     // Set timeout to wait until the next hour, then start the hourly interval
-    setTimeout(() => {
+    let chiming = setInterval(function(){
         playChime();
-        setInterval(playChime, 3600000); // Repeat every hour
     }, timeUntilNextHour);
+    chiming
+    //setTimeout(clearInterval, 3600000, chiming);
+
+/*    setTimeout(() => {
+          playChime();
+          setInterval(playChime, 3600000); // Repeat every hour
+    }, timeUntilNextHour);
+*/
 }
 
 async function playChime() {
