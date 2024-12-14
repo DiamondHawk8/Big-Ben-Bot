@@ -12,6 +12,7 @@ dotenv.config();
 
 const TOKEN = process.env.DISCORD_TOKEN; // Bot token
 const CHANNEL_ID = process.env.CHANNEL_ID; // Voice channel ID
+
 console.log('DISCORD_TOKEN:', process.env.DISCORD_TOKEN);
 console.log('CHANNEL_ID:', process.env.CHANNEL_ID);
 
@@ -25,23 +26,16 @@ client.once('ready', () => {
 function scheduleHourlyChime() {
     const now = new Date();
     const nextHour = new Date(now);
-    nextHour.setHours(now.getHours()+1, 0, 0, 0); // Set to the start of the next hour
+    nextHour.setHours(now.getHours() + 1, 0, 0, 0); // Set to the start of the next hour
     const timeUntilNextHour = nextHour - now;
 
     console.log(`Next chime scheduled in ${Math.floor(timeUntilNextHour / 1000)} seconds.`);
 
-    // Set timeout to wait until the next hour, then start the hourly interval
-    let chiming = setInterval(function(){
-        playChime();
+    // Set a timeout to start the first chime at the next hour
+    setTimeout(() => {
+        playChime(); // Play the chime immediately at the next hour
+        setInterval(playChime, 3600000); // Schedule subsequent chimes every hour
     }, timeUntilNextHour);
-    chiming
-    //setTimeout(clearInterval, 3600000, chiming);
-
-/*    setTimeout(() => {
-          playChime();
-          setInterval(playChime, 3600000); // Repeat every hour
-    }, timeUntilNextHour);
-*/
 }
 
 async function playChime() {
